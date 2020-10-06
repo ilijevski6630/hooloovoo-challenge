@@ -1,0 +1,4 @@
+# Default ignored files
+/.idea
+# .terraform
+/aws-jenkins/terraform/.terraform/
