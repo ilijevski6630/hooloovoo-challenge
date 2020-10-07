@@ -6,30 +6,32 @@
   tasks:
     - name: Install yum utils
       yum:
-        name: yum-utils
-        state: latest
+        name:
+          - java-1.8.0-openjdk
+          - docker
+          - device-mapper-persistent-data
+          - lvm2
 
-    - name: Install device-mapper-persistent-data
-      yum:
-        name: device-mapper-persistent-data
-        state: latest
-
-    - name: Install lvm2
-      yum:
-        name: lvm2
-        state: latest
-
-    - name: Add Docker repo
+    - name: Download nvm
       get_url:
-        url: https://download.docker.com/linux/centos/docker-ce.repo
-        dest: /etc/yum.repos.d/docer-ce.repo
-      become: yes
+        url: https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh
+        dest: /home/ec2-user/install.sh
 
-    - name: Install Docker
-      package:
-        name: docker-ce
-        state: latest
-      become: yes
+    - name: Install nvm
+      shell: >
+        bash /home/ec2-user/install.sh
+      environment:
+        - NVM_DIR: /usr/bin
+
+    - name: Move binary to path
+      copy:
+        src: /usr/bin/nvm.sh
+        dest: /usr/bin/nvm
+
+    - name: Install Node.js
+      become: true
+      shell: >
+        nvm install node
 
     - name: Start Docker service
       service:
@@ -37,10 +39,3 @@
         state: started
         enabled: yes
       become: yes
-
-    - name: Install yum packages
-      yum:
-        name:
-          - java-1.8.0-openjdk
-          - npm
-          - node
