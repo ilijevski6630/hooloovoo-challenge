@@ -19,6 +19,7 @@
       - bridge-utils
       - git
       - vim
+      - docker
 
 - name: Enable service libvirtd
   systemd:
