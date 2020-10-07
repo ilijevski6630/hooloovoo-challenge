@@ -62,7 +62,5 @@
   file: dest=/usr/local/bin/minikube mode=a+x
 
 - name: Enable service minikube
-  systemd:
-    name: minikube
-    enabled: yes
-    state: started
+  shell: >
+    minikube start
