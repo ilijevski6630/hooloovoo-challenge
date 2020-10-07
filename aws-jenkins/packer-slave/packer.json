@@ -3,12 +3,13 @@
     {
       "name": "jenkins-dynamic-slave",
       "ami_name": "jenkins-dynamic-slave-ami",
-      "ami_description": "Amazon Linux 2 AMI used by Jenkins for dynamic Jenkins slaves",
+      "ami_description": "AMI used by Jenkins for dynamic Jenkins slaves",
       "type": "amazon-ebs",
       "region": "eu-west-1",
-      "source_ami": "ami-0bb3fad3c0286ebd5",
+      "source_ami": "ami-0f4e85b6ae33f9b5d",
       "instance_type": "t2.micro",
       "ssh_username": "ec2-user",
+      "user_data_file": "./user-data",
       "launch_block_device_mappings": [
         {
           "device_name": "/dev/xvda",
@@ -17,12 +18,6 @@
           "delete_on_termination": true
         }
       ]
-    }
-  ],
-  "provisioners": [
-    {
-      "type": "ansible",
-      "playbook_file": "./bootstrap.yml"
     }
   ]
 }
