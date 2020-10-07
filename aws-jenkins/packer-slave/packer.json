@@ -9,7 +9,7 @@
       "source_ami": "ami-0f4e85b6ae33f9b5d",
       "instance_type": "t2.micro",
       "ssh_username": "ec2-user",
-      "user_data_file": "./user-data",
+      "user_data_file": "./user-data"
     }
   ]
 }
