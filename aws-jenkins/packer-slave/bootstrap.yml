@@ -15,18 +15,13 @@
     - name: Download nvm
       get_url:
         url: https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh
-        dest: /home/ec2-user/install.sh
+        dest: /tmp/install.sh
 
     - name: Install nvm
       shell: >
-        bash /home/ec2-user/install.sh
+        bash /tmp/install.sh
       environment:
         - NVM_DIR: /usr/bin
-
-    - name: Move binary to path
-      copy:
-        src: /usr/bin/nvm.sh
-        dest: /usr/bin/nvm
 
     - name: Install Node.js
       become: true
