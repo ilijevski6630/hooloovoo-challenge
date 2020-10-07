@@ -4,17 +4,7 @@
       "ami_name": "jenkins-dynamic-slave",
       "type": "amazon-ebs",
       "region": "eu-west-1",
-      "source_ami_filter": {
-        "owners": [
-          "099720109477"
-        ],
-        "filters": {
-          "virtualization-type": "hvm",
-          "Name": "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*",
-          "root-device-type": "ebs"
-        },
-        "most_recent": true
-      },
+      "source_ami": "ami-0ba78938cd4e98c81",
       "instance_type": "t2.micro",
       "ssh_username": "ec2-user",
       "user_data_file": "./user-data",
