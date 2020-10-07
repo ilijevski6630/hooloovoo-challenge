@@ -3,7 +3,9 @@
   hosts: localhost
   connection: local
   gather_facts: false
-  become: true
+  become: yes
+  become_method: sudo
+  remote_user: ec2-user
   tasks:
     - name: Install yum utils
       yum:
