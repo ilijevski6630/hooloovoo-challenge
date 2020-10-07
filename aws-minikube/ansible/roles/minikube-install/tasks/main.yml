@@ -56,11 +56,13 @@
 
 - name: Download Minikube
   get_url:
-    url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-    dest: /usr/local/bin/minikube
+    url: https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
+    dest: /home/minikube.rpm
 
-- name: Changing perm of "/usr/local/bin/minikube", adding "+x"
-  file: dest=/usr/local/bin/minikube mode=a+x
+- name: Install Minikube
+  yum:
+    name: /home/minikube.rpm
+    state: present
 
 - name: Enable service minikube
   shell: >
