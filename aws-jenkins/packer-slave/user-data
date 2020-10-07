@@ -11,6 +11,8 @@ packages:
  - python3
  - python3-pip
  - jq
+ - npm
+ - node
 runcmd:
 # AWS cli
  - pip3 install awscli
