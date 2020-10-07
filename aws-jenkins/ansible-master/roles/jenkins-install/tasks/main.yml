@@ -3,6 +3,7 @@
   yum:
     name:
       - java-1.8.0-openjdk
+      - unzip
 
 - name: Prepare Jenkins repo
   get_url:
@@ -27,6 +28,14 @@
 
 - name: Timeout for Jenkins to startup
   wait_for: timeout=30
+
+- name: Download and unarchive Packer.
+  unarchive:
+    src: https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_linux_{{ packer_arch }}.zip
+    dest: "{{ packer_bin_path }}"
+    remote_src: true
+    creates: "{{ packer_bin_path }}/packer"
+    mode: 0755
 
 - name: Get init password Jenkins
   shell: cat /var/lib/jenkins/secrets/initialAdminPassword
