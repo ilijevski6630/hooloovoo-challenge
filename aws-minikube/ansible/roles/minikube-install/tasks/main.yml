@@ -17,6 +17,8 @@
       - virt-top
       - libguestfs-tools
       - bridge-utils
+      - git
+      - vim
 
 - name: Enable service libvirtd
   systemd:
@@ -45,6 +47,8 @@
   register: sock_rw_perms
 
 - name: Restart libvirt service
+  debug:
+    msg: Restarting libvirt service
   notify:
     - "restart libvirt service"
   when: sock_group is succeeded and sock_rw_perms is succeeded
