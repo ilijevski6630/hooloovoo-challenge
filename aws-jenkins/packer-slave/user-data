@@ -1,0 +1,16 @@
+#cloud-config
+apt_sources:
+ - source: "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+ keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+package_update: true
+package_upgrade: true
+packages:
+ - [docker-ce, 18.06.1~ce-0~ubuntu]
+ - openjdk-8-jdk
+ - maven
+ - python3
+ - python3-pip
+ - jq
+runcmd:
+# AWS cli
+ - pip3 install awscli

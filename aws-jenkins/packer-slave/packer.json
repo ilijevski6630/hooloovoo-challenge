@@ -1,0 +1,31 @@
+{
+  "builders": [
+    {
+      "ami_name": "jenkins-node",
+      "type": "amazon-ebs",
+      "region": "eu-west-1",
+      "source_ami_filter": {
+        "owners": [
+          "099720109477"
+        ],
+        "filters": {
+          "virtualization-type": "hvm",
+          "Name": "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*",
+          "root-device-type": "ebs"
+        },
+        "most_recent": true
+      },
+      "instance_type": "t3.small",
+      "ssh_username": "ubuntu",
+      "user_data_file": "./user-data",
+      "launch_block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "volume_size": 40,
+          "volume_type": "gp2",
+          "delete_on_termination": true
+        }
+      ]
+    }
+  ]
+}
