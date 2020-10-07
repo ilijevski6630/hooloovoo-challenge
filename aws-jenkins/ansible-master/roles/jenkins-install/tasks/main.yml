@@ -1,5 +1,5 @@
 ---
-- name: Install Java JDK
+- name: Install yum packages
   yum:
     name:
       - java-1.8.0-openjdk

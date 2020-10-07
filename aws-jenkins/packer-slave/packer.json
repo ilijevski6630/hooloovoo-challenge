@@ -1,13 +1,14 @@
 {
   "builders": [
     {
-      "ami_name": "jenkins-dynamic-slave",
+      "name": "jenkins-dynamic-slave",
+      "ami_name": "jenkins-dynamic-slave-ami",
+      "ami_description": "Amazon Linux 2 AMI used by Jenkins for dynamic Jenkins slaves",
       "type": "amazon-ebs",
       "region": "eu-west-1",
-      "source_ami": "ami-0ba78938cd4e98c81",
+      "source_ami": "ami-0bb3fad3c0286ebd5",
       "instance_type": "t2.micro",
       "ssh_username": "ec2-user",
-      "user_data_file": "./user-data",
       "launch_block_device_mappings": [
         {
           "device_name": "/dev/sda1",
@@ -16,6 +17,12 @@
           "delete_on_termination": true
         }
       ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "./bootstrap.yml"
     }
   ]
 }
