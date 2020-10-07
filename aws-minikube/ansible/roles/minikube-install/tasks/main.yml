@@ -63,4 +63,4 @@
 
 - name: Enable service minikube
   shell: >
-    minikube start
+    /usr/local/bin/minikube start
