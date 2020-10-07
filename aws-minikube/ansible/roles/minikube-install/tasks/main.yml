@@ -21,39 +21,6 @@
       - vim
       - docker
       - conntrack
-#
-#- name: Enable service libvirtd
-#  systemd:
-#    name: libvirtd
-#    enabled: yes
-#    state: started
-#
-#- name: Add centos user to group libvirt
-#  user:
-#    name: centos
-#    comment: CentOS
-#    group: libvirt
-#
-#- name: config change sock_group - libvirt
-#  lineinfile:
-#    path: /etc/libvirt/libvirtd.conf
-#    regexp: '^unix_sock_group='
-#    line: unix_sock_group = "libvirt"
-#  register: sock_group
-#
-#- name: config change sock_rw_perms - libvirt
-#  lineinfile:
-#    path: /etc/libvirt/libvirtd.conf
-#    regexp: '^sock_rw_perms='
-#    line: unix_sock_rw_perms = "0770"
-#  register: sock_rw_perms
-#
-#- name: Restart libvirt service
-#  debug:
-#    msg: Restarting libvirt service
-#  notify:
-#    - "restart libvirt service"
-#  when: sock_group is succeeded and sock_rw_perms is succeeded
 
 - name: Download Minikube
   get_url:
@@ -65,6 +32,3 @@
     name: /home/minikube.rpm
     state: present
 
-- name: Enable service minikube
-  shell: >
-    /usr/local/bin/minikube start --vm-driver=none
