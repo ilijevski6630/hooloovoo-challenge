@@ -7,6 +7,7 @@
   tasks:
     - name: Install yum utils
       yum:
+        use_backend: yum
         name:
           - java-1.8.0-openjdk
           - docker
