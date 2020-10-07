@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  connection: local
+  become: yes
+  become_method: su
+  gather_facts: false
+  roles:
+    - role: minikube-install

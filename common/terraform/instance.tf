@@ -12,7 +12,7 @@ resource "aws_instance" "jenkins" {
 
 resource "aws_instance" "minikube" {
   ami = "ami-0d4002a13019b7703" //CentOS7
-  instance_type = "t2.micro"
+  instance_type = "t3.small"
   security_groups = [ "enable-ssh" ]
   key_name = "ilijevskia"
   tags = {
