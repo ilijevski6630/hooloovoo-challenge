@@ -4,6 +4,7 @@
     name:
       - java-1.8.0-openjdk
       - unzip
+      - docker
 
 - name: Prepare Jenkins repo
   get_url:
@@ -36,6 +37,12 @@
     remote_src: true
     creates: "{{ packer_bin_path }}/packer"
     mode: 0755
+
+- name: Add jenkins user to docker group
+  user:
+    name: "jenkins"
+    groups: docker
+    append: true
 
 - name: Get init password Jenkins
   shell: cat /var/lib/jenkins/secrets/initialAdminPassword
