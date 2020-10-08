@@ -1,5 +1,5 @@
-resource "aws_ecr_repository" "hooloovoo-ecr-backend" {
-  name                 = "hooloovoo-ecr-backend"
+resource "aws_ecr_repository" "spring-rest-crud" {
+  name                 = "spring-rest-crud"
   image_tag_mutability = "IMMUTABLE"
 
   image_scanning_configuration {
