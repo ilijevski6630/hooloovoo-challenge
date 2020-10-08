@@ -11,4 +11,5 @@ resource "aws_db_instance" "app-db" {
   parameter_group_name = "default.mysql5.7"
   final_snapshot_identifier = "foo"
   skip_final_snapshot  = "true"
+  publicly_accessible  = "true"
 }
