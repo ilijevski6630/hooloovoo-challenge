@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "hooloovoo-ecr-backend" {
-  name                 = "hooloovoo-ecr"
+  name                 = "hooloovoo-ecr-backend"
   image_tag_mutability = "IMMUTABLE"
 
   image_scanning_configuration {
@@ -8,7 +8,7 @@ resource "aws_ecr_repository" "hooloovoo-ecr-backend" {
 }
 
 resource "aws_ecr_repository" "hooloovoo-ecr-frontend" {
-  name                 = "hooloovoo-ecr"
+  name                 = "hooloovoo-ecr-frontend"
   image_tag_mutability = "IMMUTABLE"
 
   image_scanning_configuration {
