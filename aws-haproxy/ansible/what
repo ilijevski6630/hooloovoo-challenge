@@ -1,0 +1,23 @@
+cd /tmp
+wget -O epel.rpm –nv \
+https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo yum install -y ./epel.rpm
+
+
+sudo yum install python2-certbot-apache.noarch
+//Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+  Importing GPG key 0x352C64E5:
+   Userid     : "Fedora EPEL (7) <epel@fedoraproject.org>"
+   Fingerprint: 91e9 7d7c 4a5e 96f1 7f3e 888f 6a2f aea2 352c 64e5
+   Package    : epel-release-7-12.noarch (installed)
+   From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+
+
+sudo certbot -i apache -a manual --preferred-challenges dns -d lamp.example.com
+sudo certbot certonly --standalone --preferred-challenges http --http-01-port 30010 -d aws-haproxy.ddns.net
+
+
+mkdir /etc/haproxy/certs/
+
+DOMAIN='aws-haproxy.ddns.net' sudo -E bash -c 'cat /etc/letsencrypt/live/$DOMAIN/fullchain.pem /etc/letsencrypt/live/$DOMAIN/privkey.pem > /etc/haproxy/certs/$DOMAIN.pem'
+

@@ -25,7 +25,7 @@ resource "aws_instance" "minikube" {
 resource "aws_instance" "haproxy" {
   ami = "ami-0bb3fad3c0286ebd5" //Amazon Linux 2
   instance_type = "t2.micro"
-  security_groups = [ "default"]
+  security_groups = [ "haproxy"]
   key_name = "ilijevskia"
   iam_instance_profile = "EC2TOAWSSERVICES"
   tags = {
