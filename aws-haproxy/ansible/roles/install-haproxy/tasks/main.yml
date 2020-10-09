@@ -1,0 +1,48 @@
+---
+- name: Install epel repo
+  yum:
+    name:
+      - epel-release
+
+- name: Install epel key
+  rpm_key:
+    state: present
+    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+
+- name: Install certbot and haproxy
+  yum:
+    name:
+      - python2-certbot-apache
+      - haproxy
+
+- name: Start and enable HAProxy
+  systemd:
+    name: haproxy
+    state: started
+    enabled: true
+
+- name: Create a directory if it does not exist
+  file:
+    path: /etc/haproxy/certs/
+    state: directory
+    mode: '0755'
+
+- name: Run certbot to obtain Let's encrypt cert
+  shell: >
+    sudo certbot certonly --standalone --preferred-challenges http --http-01-port 8888 -d aws-haproxy.ddns.net
+
+- name: Combine and copy certs from default folder to haproxy/certs
+  shell: >
+    DOMAIN='aws-haproxy.ddns.net' sudo -E bash -c 'cat /etc/letsencrypt/live/$DOMAIN/fullchain.pem /etc/letsencrypt/live/$DOMAIN/privkey.pem > /etc/haproxy/certs/$DOMAIN.pem'
+
+- name: Copy HAProxy config
+  become: yes
+  become_user: root
+  copy:
+    src: haproxy.cfg
+    dest: /etc/haproxy/haproxy.cfg
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - restart haproxy service
