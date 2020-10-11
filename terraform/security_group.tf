@@ -6,6 +6,7 @@ resource "aws_security_group" "minikube" {
   ingress {
     from_port   = 0
     to_port     = 0
+    description = ""
     protocol    = "-1"
     cidr_blocks = ["172.31.0.0/16"]
   }
@@ -13,6 +14,7 @@ resource "aws_security_group" "minikube" {
   ingress {
       from_port   = 0
       to_port     = 0
+      description = "Jenkins-master"
       protocol    = "-1"
       cidr_blocks = ["54.216.140.246/32"]
     }
@@ -38,14 +40,7 @@ resource "aws_security_group" "enableMySQL" {
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = ["89.216.91.235/32"]
-  }
-
-  ingress {
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-    cidr_blocks = ["172.31.0.0/16"]
+    cidr_blocks = ["172.31.0.0/16","89.216.91.235/32"]
   }
 
   egress {
@@ -69,14 +64,7 @@ resource "aws_security_group" "enable-ssh" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["89.216.91.235/32"]
-  }
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["172.31.0.0/16"]
+    cidr_blocks = ["172.31.0.0/16","89.216.91.235/32"]
   }
 
   egress {
@@ -99,14 +87,7 @@ resource "aws_security_group" "jenkinsSlave" {
   ingress {
     from_port   = 0
     to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["172.31.0.0/16"]
-  }
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
+    protocol    = "all"
     cidr_blocks = ["172.31.0.0/16"]
   }
 
@@ -131,6 +112,7 @@ resource "aws_security_group" "JenkinsWebUI" {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
+    description = "JenkinsWebUIHTTP"
     cidr_blocks = ["89.216.91.235/32"]
   }
 
@@ -156,83 +138,28 @@ resource "aws_security_group" "JenkinsWebhook" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["140.82.112.0/20"]
-  }
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["185.199.108.0/22"]
-  }
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["192.30.252.0/22"]
+    cidr_blocks = ["140.82.112.0/20","185.199.108.0/22","192.30.252.0/22"]
   }
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["140.82.112.0/20"]
-  }
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["185.199.108.0/22"]
-  }
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["192.30.252.0/22"]
+    cidr_blocks = ["140.82.112.0/20","185.199.108.0/22","192.30.252.0/22"]
   }
 
   ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["140.82.112.0/20"]
-  }
-
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["185.199.108.0/22"]
-  }
-
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["192.30.252.0/22"]
+    cidr_blocks = ["140.82.112.0/20","185.199.108.0/22","192.30.252.0/22"]
   }
 
   ingress {
     from_port   = 9418
     to_port     = 9418
     protocol    = "tcp"
-    cidr_blocks = ["140.82.112.0/20"]
-  }
-
-  ingress {
-    from_port   = 9418
-    to_port     = 9418
-    protocol    = "tcp"
-    cidr_blocks = ["185.199.108.0/22"]
-  }
-
-  ingress {
-    from_port   = 9418
-    to_port     = 9418
-    protocol    = "tcp"
-    cidr_blocks = ["192.30.252.0/22"]
+    cidr_blocks = ["140.82.112.0/20","185.199.108.0/22","192.30.252.0/22"]
   }
 
   egress {
@@ -255,6 +182,7 @@ resource "aws_security_group" "haproxy" {
   ingress {
     from_port   = 30010
     to_port     = 30010
+    description = "Backend"
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -262,6 +190,7 @@ resource "aws_security_group" "haproxy" {
   ingress {
     from_port   = 30020
     to_port     = 30020
+    description = "Frontend"
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -269,6 +198,7 @@ resource "aws_security_group" "haproxy" {
   ingress {
     from_port   = 9090
     to_port     = 9090
+    description = "LetsEncrypt"
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
