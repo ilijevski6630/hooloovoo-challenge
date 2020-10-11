@@ -260,6 +260,13 @@ resource "aws_security_group" "haproxy" {
   }
 
   ingress {
+    from_port   = 30020
+    to_port     = 30020
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
     from_port   = 9090
     to_port     = 9090
     protocol    = "tcp"
