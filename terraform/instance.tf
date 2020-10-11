@@ -2,7 +2,7 @@
 
 resource "aws_instance" "jenkins" {
   ami = "ami-0bb3fad3c0286ebd5" //Amazon Linux 2
-  instance_type = "t2.micro"
+  instance_type = "t2.small"
   security_groups = [ "enable-ssh","JenkinsWebUI","JenkinsWebhook"]
   key_name = "ilijevskia"
   iam_instance_profile = "EC2TOAWSSERVICES"
