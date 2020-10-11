@@ -7,8 +7,8 @@ resource "aws_ecr_repository" "spring-rest-crud" {
   }
 }
 
-resource "aws_ecr_repository" "hooloovoo-ecr-frontend" {
-  name                 = "hooloovoo-ecr-frontend"
+resource "aws_ecr_repository" "ui-crud" {
+  name                 = "ui-crud"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
